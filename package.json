@@ -1,0 +1,12 @@
+{
+  "name": "vergil-skills",
+  "version": "0.1.0",
+  "description": "Codex skill pack installer for OpenSpec projects",
+  "bin": {
+    "vergil-skills": "./bin/vergil-skills.js"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "MIT"
+}
