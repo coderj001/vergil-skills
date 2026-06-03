@@ -9,6 +9,7 @@ const assert = require("node:assert/strict");
 const {
   MANIFEST_RELATIVE_PATH,
   installIntoTarget,
+  normalizeInstructionSelection,
   renderAgentsBlock
 } = require("../src/install.js");
 
@@ -50,4 +51,16 @@ test("install updates an existing managed AGENTS block without removing other co
   assert.match(agents, /karpthy\.instructions\.md/);
   assert.match(agents, /# Local notes/);
   assert.equal((agents.match(/vergil-skills:managed:start/g) || []).length, 1);
+});
+
+test("missing --instruction only falls back to karpthy.instructions.md", () => {
+  assert.equal(
+    normalizeInstructionSelection(null, ["go.instructions.md", "karpthy.instructions.md"]),
+    "karpthy.instructions.md"
+  );
+
+  assert.throws(
+    () => normalizeInstructionSelection(null, ["go.instructions.md", "rust.instructions.md"]),
+    /No default instruction is available/
+  );
 });

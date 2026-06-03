@@ -84,7 +84,9 @@ function parseArgs(args) {
 
 function listInstructions() {
   const instructionFiles = getSourceInstructionFiles(resolveSourceRoot());
-  const selected = normalizeInstructionSelection(null, instructionFiles);
+  const selected = instructionFiles.includes("karpthy.instructions.md")
+    ? "karpthy.instructions.md"
+    : null;
 
   for (const file of instructionFiles) {
     const marker = file === selected ? "*" : " ";

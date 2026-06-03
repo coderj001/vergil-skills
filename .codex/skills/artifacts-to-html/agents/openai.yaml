@@ -1,0 +1,3 @@
+interface:
+  display_name: "Artifacts to HTML"
+  short_description: "Create single-file OpenSpec HTML artifacts."

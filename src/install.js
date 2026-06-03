@@ -26,13 +26,17 @@ function getSourceInstructionFiles(sourceRoot) {
 
 function normalizeInstructionSelection(selection, instructionFiles) {
   if (!selection) {
-    if (instructionFiles.includes("karpthy.instructions.md")) {
-      return "karpthy.instructions.md";
-    }
     if (instructionFiles.length === 0) {
       throw new Error("No instruction files were found in the source package.");
     }
-    return instructionFiles[0];
+
+    if (instructionFiles.includes("karpthy.instructions.md")) {
+      return "karpthy.instructions.md";
+    }
+
+    throw new Error(
+      'No default instruction is available. Pass "--instruction <name>" explicitly, or add "karpthy.instructions.md" to the source instructions directory.'
+    );
   }
 
   const trimmed = selection.trim();

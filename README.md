@@ -68,7 +68,8 @@ Sync updates later:
 node src/cli.js sync /path/to/project --instruction go
 ```
 
-If `--instruction` is omitted, the default is `karpthy.instructions.md` when present.
+If `--instruction` is omitted, the CLI only allows `karpthy.instructions.md` as the default.
+If that file is not present in this repo, the command fails and you must pass `--instruction <name>` explicitly.
 
 ## Use It From GitHub
 

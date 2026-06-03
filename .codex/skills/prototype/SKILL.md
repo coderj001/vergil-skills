@@ -13,7 +13,7 @@ A prototype is throwaway code that answers a question. First identify the questi
 2. Choose exactly one prototype branch:
    - **Logic or state model question**: build a tiny interactive terminal app that pushes the state machine or business rules through cases that are hard to reason about on paper.
    - **Visual or product direction question**: build several radically different UI variations on a single route, switchable via a URL search parameter and a floating bottom bar.
-3. Trigger the project planning flow with `openspec-new-change` or `opesx-new`, matching whichever convention exists in the project.
+3. Trigger the project planning flow with `openspec-new-change` or `opesx-new`, matching whichever convention exists in the project make sure artifact generated mention that it's an prototype.
 4. Ask the user to run `openspec-ff-change` or `opesx-ff`, matching the convention chosen above.
 5. Continue with the `using-git-worktrees` skill if available. If it is not available, follow the repository's existing git worktree or branch conventions.
 

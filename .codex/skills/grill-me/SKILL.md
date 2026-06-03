@@ -74,5 +74,6 @@ Only offer to create an `decision.log` when all three are true:
 <after-done-with-grilling-session>
 
 > Start flow for  `openspec-new-change` or `opesx-new` with session context and ask use to run `openspec-ff-change` or `opesx-ff`
+> If `openspec-new-change` or `opesx-new` already started in the context then start with `openspec-ff-change` or `opesx-ff`
 
 </after-done-with-grilling-session>
