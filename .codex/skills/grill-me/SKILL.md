@@ -1,6 +1,6 @@
 ---
 name: grill-me
-description: Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates documentation (AGENTS.md, decision.log) inline as decisions crystallise. Use when user wants to stress-test a plan against their project's language and documented decisions.
+description: Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates documentation (AGENTS.md, CONTEXT-MEMORY.md) inline as decisions crystallise. Use when user wants to stress-test a plan against their project's language and documented decisions.
 ---
 
 <what-to-do>
@@ -26,9 +26,7 @@ Most repos have a single context:
 ```
 /
 ├── AGENTS.md
-├── logs/
-│   ├── decision.log
-│   └── decision.log.1
+├── CONTEXT-MEMORY.md
 └── src/
 ```
 
@@ -37,17 +35,15 @@ If a `CONTEXT-MAP.md` exists at the root, the repo has multiple contexts. The ma
 ```
 /
 ├── CONTEXT-MAP.md
+├── CONTEXT-MEMORY.md
 ├── AGENTS.md
-├── logs/
-│   ├── decision.log
-│   └── decision.log.1
 ```
 
 ## During the session
 
 ### Challenge against the glossary
 
-When the user uses a term that conflicts with the existing language in `decision.log`, call it out immediately. "Your glossary defines 'cancellation' as X, but you seem to mean Y — which is it?"
+When the user uses a term that conflicts with the existing language in CONTEXT-MEMORY.md, call it out immediately. "Your glossary defines 'cancellation' as X, but you seem to mean Y — which is it?"
 
 ### Sharpen fuzzy language
 
@@ -63,7 +59,6 @@ When the user states how something works, check whether the code agrees. If you 
 
 ### Offer sparingly
 
-Only offer to create an `decision.log` when all three are true:
 
 1. **Hard to reverse** — the cost of changing your mind later is meaningful
 2. **Surprising without context** — a future reader will wonder "why did they do it this way?"
