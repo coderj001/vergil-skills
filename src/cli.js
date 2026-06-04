@@ -7,8 +7,9 @@ const {
   normalizeInstructionSelection,
   resolveSourceRoot
 } = require("./install.js");
+const { chooseInstructionInteractive } = require("./tui.js");
 
-function main() {
+async function main() {
   try {
     const args = process.argv.slice(2);
     const command = args[0];
@@ -24,7 +25,7 @@ function main() {
     }
 
     if (command === "install" || command === "add" || command === "sync" || command === "update") {
-      runInstall(command, args.slice(1));
+      await runInstall(command, args.slice(1));
       return;
     }
 
@@ -34,11 +35,16 @@ function main() {
   }
 }
 
-function runInstall(command, commandArgs) {
+async function runInstall(command, commandArgs) {
   const parsed = parseArgs(commandArgs);
+  const sourceRoot = resolveSourceRoot();
+  const instructionFiles = getSourceInstructionFiles(sourceRoot);
+  const selectedInstruction = parsed.instruction
+    ? normalizeInstructionSelection(parsed.instruction, instructionFiles)
+    : await selectInstructionIfInteractive(instructionFiles);
   const result = installIntoTarget({
     target: parsed.target,
-    instruction: parsed.instruction
+    instruction: selectedInstruction
   });
 
   const mode = command === "sync" || command === "update" ? "Synced" : "Installed";
@@ -49,6 +55,14 @@ function runInstall(command, commandArgs) {
   if (result.removedFiles.length > 0) {
     console.log(`Removed stale files: ${result.removedFiles.length}`);
   }
+}
+
+async function selectInstructionIfInteractive(instructionFiles) {
+  if (process.stdin.isTTY && process.stdout.isTTY) {
+    return chooseInstructionInteractive(instructionFiles);
+  }
+
+  return normalizeInstructionSelection(null, instructionFiles);
 }
 
 function parseArgs(args) {
@@ -106,6 +120,7 @@ Commands:
 
 Options:
   --instruction <name> Select the instruction file referenced from AGENTS.md
+                       Omit it in a TTY to open the interactive picker
 
 Examples:
   npx vergil-skills install ../my-project
@@ -118,4 +133,4 @@ function fail(message) {
   process.exit(1);
 }
 
-main();
+void main();

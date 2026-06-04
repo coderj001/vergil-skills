@@ -62,6 +62,9 @@ Install into a target project:
 node src/cli.js add /path/to/project --instruction rust
 ```
 
+If you omit `--instruction` in an interactive terminal, the CLI opens a small
+TUI picker so you can choose the instruction file with the arrow keys.
+
 Sync updates later:
 
 ```bash
@@ -122,6 +125,9 @@ Accepted instruction values:
 
 - short name such as `rust` or `karpthy`
 - full filename such as `rust.instructions.md`
+
+When `--instruction` is omitted in a TTY, the CLI shows an interactive picker
+instead of immediately defaulting.
 
 ### `sync` or `update`
 
