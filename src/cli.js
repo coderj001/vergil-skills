@@ -1,5 +1,6 @@
 "use strict";
 
+const fs = require("node:fs");
 const path = require("node:path");
 const {
   getSourceInstructionFiles,
@@ -8,9 +9,12 @@ const {
   resolveSourceRoot
 } = require("./install.js");
 const { chooseInstructionInteractive } = require("./tui.js");
+const ASCII_ART_PATH = path.join(__dirname, "..", "asciiart.txt");
 
 async function main() {
   try {
+    printBanner();
+
     const args = process.argv.slice(2);
     const command = args[0];
 
@@ -126,6 +130,19 @@ Examples:
   npx vergil-skills install ../my-project
   npx vergil-skills add ../my-project --instruction rust
   npx vergil-skills sync . --instruction karpthy.instructions.md`);
+}
+
+function printBanner() {
+  if (!process.stdout.isTTY) {
+    return;
+  }
+
+  const banner = fs.readFileSync(ASCII_ART_PATH, "utf8");
+  process.stdout.write(banner);
+  if (!banner.endsWith("\n")) {
+    process.stdout.write("\n");
+  }
+  process.stdout.write("\n");
 }
 
 function fail(message) {
