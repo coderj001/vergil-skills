@@ -13,8 +13,6 @@ const ASCII_ART_PATH = path.join(__dirname, "..", "asciiart.txt");
 
 async function main() {
   try {
-    printBanner();
-
     const args = process.argv.slice(2);
     const command = args[0];
 
@@ -59,6 +57,8 @@ async function runInstall(command, commandArgs) {
   if (result.removedFiles.length > 0) {
     console.log(`Removed stale files: ${result.removedFiles.length}`);
   }
+
+  printBanner();
 }
 
 async function selectInstructionIfInteractive(instructionFiles) {
