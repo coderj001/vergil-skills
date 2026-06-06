@@ -15,7 +15,7 @@ The goal is to stop manually copying skills and instructions after `openspec ini
 The installer:
 
 - copies this repo's managed `.codex` assets into a target project
-- copies all `instructions/*.instructions.md` into the target project
+- copies the selected `instructions/*.instructions.md` into the target project
 - updates `AGENTS.md` with one managed block that points to exactly one selected instruction file
 - writes a manifest to `.codex/vergil-skills/manifest.json`
 
@@ -148,7 +148,7 @@ Use this after:
 After install, the target project will contain:
 
 - `.codex/...` copied from this repo
-- `instructions/*.instructions.md` copied from this repo
+- the selected `instructions/*.instructions.md` copied from this repo
 - `AGENTS.md` with a managed block like:
 
 ```md

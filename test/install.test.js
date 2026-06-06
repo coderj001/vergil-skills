@@ -32,12 +32,18 @@ test("install copies managed files and creates a managed AGENTS block", () => {
   const agents = fs.readFileSync(path.join(root, "AGENTS.md"), "utf8");
   assert.equal(agents, `${renderAgentsBlock("rust.instructions.md")}\n`);
 
+  const instructionFiles = fs.readdirSync(path.join(root, "instructions"));
+  assert.deepEqual(instructionFiles, ["rust.instructions.md"]);
+
   const manifest = JSON.parse(
     fs.readFileSync(path.join(root, MANIFEST_RELATIVE_PATH), "utf8")
   );
 
   assert.equal(manifest.selectedInstruction, "rust.instructions.md");
-  assert.ok(manifest.files.includes(path.join("instructions", "rust.instructions.md")));
+  assert.deepEqual(
+    manifest.files.filter((file) => file.startsWith("instructions/")),
+    [path.join("instructions", "rust.instructions.md")]
+  );
 });
 
 test("install updates an existing managed AGENTS block without removing other content", () => {
@@ -51,6 +57,9 @@ test("install updates an existing managed AGENTS block without removing other co
   assert.match(agents, /karpthy\.instructions\.md/);
   assert.match(agents, /# Local notes/);
   assert.equal((agents.match(/vergil-skills:managed:start/g) || []).length, 1);
+
+  const instructionFiles = fs.readdirSync(path.join(root, "instructions"));
+  assert.deepEqual(instructionFiles, ["karpthy.instructions.md"]);
 });
 
 test("missing --instruction only falls back to karpthy.instructions.md", () => {

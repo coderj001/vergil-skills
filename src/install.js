@@ -200,9 +200,11 @@ function ensureTrailingNewline(value) {
   return value.endsWith("\n") ? value : `${value}\n`;
 }
 
-function planManagedFiles() {
-  return [...collectFiles(resolveSourceRoot(), ".codex"), ...collectFiles(resolveSourceRoot(), "instructions")]
-    .filter((relativePath) => relativePath !== MANIFEST_RELATIVE_PATH);
+function planManagedFiles(selectedInstruction) {
+  return [
+    ...collectFiles(resolveSourceRoot(), ".codex"),
+    path.join("instructions", selectedInstruction)
+  ].filter((relativePath) => relativePath !== MANIFEST_RELATIVE_PATH);
 }
 
 function installIntoTarget(options = {}) {
@@ -212,7 +214,7 @@ function installIntoTarget(options = {}) {
 
   const instructionFiles = getSourceInstructionFiles(sourceRoot);
   const selectedInstruction = normalizeInstructionSelection(options.instruction, instructionFiles);
-  const nextFiles = planManagedFiles();
+  const nextFiles = planManagedFiles(selectedInstruction);
   const previousManifest = readManifest(targetRoot);
 
   copyManagedFiles(sourceRoot, targetRoot, nextFiles);

@@ -118,7 +118,7 @@ function printHelp() {
   console.log(`Usage: ${executable} <command> [target] [options]
 
 Commands:
-  install, add         Copy managed Codex skills, rules, and instructions
+  install, add         Copy managed Codex skills, rules, and the selected instruction
   sync, update         Re-sync managed files and remove stale files
   list-instructions    List available instruction files
 
