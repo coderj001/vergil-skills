@@ -68,6 +68,11 @@ test("missing --instruction only falls back to karpthy.instructions.md", () => {
     "karpthy.instructions.md"
   );
 
+  assert.equal(
+    normalizeInstructionSelection("none", ["go.instructions.md", "karpthy.instructions.md"]),
+    "karpthy.instructions.md"
+  );
+
   assert.throws(
     () => normalizeInstructionSelection(null, ["go.instructions.md", "rust.instructions.md"]),
     /No default instruction is available/

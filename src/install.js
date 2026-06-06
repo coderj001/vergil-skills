@@ -40,6 +40,16 @@ function normalizeInstructionSelection(selection, instructionFiles) {
   }
 
   const trimmed = selection.trim();
+  if (trimmed === "none") {
+    if (instructionFiles.includes("karpthy.instructions.md")) {
+      return "karpthy.instructions.md";
+    }
+
+    throw new Error(
+      'No default instruction is available. Pass "--instruction <name>" explicitly, or add "karpthy.instructions.md" to the source instructions directory.'
+    );
+  }
+
   const candidates = new Set([
     trimmed,
     trimmed.endsWith(".instructions.md") ? trimmed : `${trimmed}.instructions.md`

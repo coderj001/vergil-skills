@@ -107,7 +107,7 @@ npx git+https://github.com/<username>/<repo>.git add /path/to/project --instruct
 
 ### `list-instructions`
 
-Shows all available instruction files bundled in this repo.
+Shows selectable instruction choices bundled in this repo.
 
 ```bash
 node src/cli.js list-instructions
@@ -125,6 +125,7 @@ Accepted instruction values:
 
 - short name such as `rust` or `karpthy`
 - full filename such as `rust.instructions.md`
+- `none` to keep the implicit default instruction
 
 When `--instruction` is omitted in a TTY, the CLI shows an interactive picker
 instead of immediately defaulting.

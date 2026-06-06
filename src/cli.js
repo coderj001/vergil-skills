@@ -8,7 +8,7 @@ const {
   normalizeInstructionSelection,
   resolveSourceRoot
 } = require("./install.js");
-const { chooseInstructionInteractive } = require("./tui.js");
+const { chooseInstructionInteractive, getInstructionChoices } = require("./tui.js");
 const ASCII_ART_PATH = path.join(__dirname, "..", "asciiart.txt");
 
 async function main() {
@@ -102,12 +102,10 @@ function parseArgs(args) {
 
 function listInstructions() {
   const instructionFiles = getSourceInstructionFiles(resolveSourceRoot());
-  const selected = instructionFiles.includes("karpthy.instructions.md")
-    ? "karpthy.instructions.md"
-    : null;
+  const instructionChoices = getInstructionChoices(instructionFiles);
 
-  for (const file of instructionFiles) {
-    const marker = file === selected ? "*" : " ";
+  for (const file of instructionChoices) {
+    const marker = file === "none" ? "*" : " ";
     console.log(`${marker} ${file}`);
   }
 }

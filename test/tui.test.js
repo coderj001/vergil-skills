@@ -13,20 +13,21 @@ test("instruction labels trim the file suffix", () => {
   assert.equal(instructionLabel("rust.instructions.md"), "rust");
 });
 
-test("default instruction prefers karpthy when present", () => {
+test("default instruction prefers none when karpthy is present", () => {
   assert.equal(
     getDefaultInstructionIndex(["go.instructions.md", "karpthy.instructions.md", "rust.instructions.md"]),
-    1
+    2
   );
 });
 
-test("instruction picker marks the active and default entries", () => {
+test("instruction picker hides karpthy and marks none as default", () => {
   const rendered = renderInstructionPicker(
     ["go.instructions.md", "karpthy.instructions.md", "rust.instructions.md"],
-    2,
-    1
+    1,
+    2
   );
 
-  assert.match(rendered, /❯ 3\. rust/);
-  assert.match(rendered, /  2\. karpthy \(default\)/);
+  assert.match(rendered, /❯ 2\. rust/);
+  assert.match(rendered, /  3\. none \(default\)/);
+  assert.doesNotMatch(rendered, /karpthy/);
 });
